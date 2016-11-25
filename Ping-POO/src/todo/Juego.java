@@ -23,7 +23,7 @@ public class Juego {
        
         
         
-        int raqVel=10, px, py, pelvel=1, aleatorioX, aleatorioY, milisegundos=200/*Velocidad a la que viaja la pelota*/, pause=0;
+        int raqVel=10, px, py, pelvel=1, aleatorioX, aleatorioY, milisegundos=20/*Velocidad a la que viaja la pelota*/, pause=0;
         Random ale=new Random();
         Timer tiempo;
         //Constr
@@ -81,7 +81,10 @@ public class Juego {
             aleatorioX= ale.nextInt(10)+1;
             aleatorioY= ale.nextInt(10)+1;
             
-            
+            if(aleatorioX>5)
+                aleatorioX=(aleatorioX-5)*-1;
+            if(aleatorioY>5)
+                aleatorioY=(aleatorioY-5)*-1;
             
             tiempo= new Timer(milisegundos, new ActionListener() {
                 @Override
