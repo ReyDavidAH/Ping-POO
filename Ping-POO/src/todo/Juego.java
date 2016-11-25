@@ -71,16 +71,16 @@ public class Juego {
                 @Override
                 public void keyPressed(KeyEvent e) {
                     //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-                if (e.getKeyCode()== KeyEvent.VK_UP){
+                if (raquetaD.getY()>0 && e.getKeyCode()== KeyEvent.VK_UP){
                     raquetaD.setLocation(raquetaD.getX(), raquetaD.getY()-raqVel);
                 }
-                if (e.getKeyCode()== KeyEvent.VK_DOWN){ 
+                if (raquetaD.getY()<371 && e.getKeyCode()== KeyEvent.VK_DOWN){ 
                     raquetaD.setLocation(raquetaD.getX(), raquetaD.getY()+raqVel);
                 }
-                if (e.getKeyCode()== KeyEvent.VK_W){
+                if (raquetaI.getY()>0 && e.getKeyCode()== KeyEvent.VK_W){
                     raquetaI.setLocation(raquetaI.getX(), raquetaI.getY()-raqVel);
                 }
-                if (e.getKeyCode()== KeyEvent.VK_S){
+                if (raquetaI.getY()<371 && e.getKeyCode()== KeyEvent.VK_S){
                     raquetaI.setLocation(raquetaI.getX(), raquetaI.getY()+raqVel);
                 }
                 }
