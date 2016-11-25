@@ -124,8 +124,8 @@ public class Juego {
                             tiempo.start();
                             pause=1;
                         }else{
-                        tiempo.stop();
-                        pause=0;
+                            tiempo.stop();
+                            pause=0;
                         }
                     }
                 }
