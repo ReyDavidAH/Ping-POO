@@ -1,11 +1,16 @@
 package Todo;
 import java.awt.Color;
+import java.awt.Rectangle;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.util.Random;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.Timer;
 public class Juego {
         //Atri
         JFrame ventana;
@@ -14,7 +19,13 @@ public class Juego {
         JLabel pelota;
         JLabel raquetaI;
         JLabel raquetaD;
-        int raqVel=10;
+        Rectangle raqueI, raqueD, pel;
+       
+        
+        
+        int raqVel=10, px, py, pelvel=1, aleatorioX, aleatorioY, milisegundos=200/*Velocidad a la que viaja la pelota*/, pause=0;
+        Random ale=new Random();
+        Timer tiempo;
         //Constr
         public Juego(){
             //Ventana
@@ -61,6 +72,27 @@ public class Juego {
             pelota.setVisible(true);
             panelJuego.add(pelota, 0);
             
+            raqueI= new Rectangle(raquetaI.getBounds());
+            raqueD= new Rectangle(raquetaD.getBounds());
+            pel= new Rectangle(pelota.getBounds());
+            
+            raqueI.setBounds(raquetaI.getBounds());
+            raqueD.setBounds(raquetaD.getBounds());
+            aleatorioX= ale.nextInt(10)+1;
+            aleatorioY= ale.nextInt(10)+1;
+            
+            
+            
+            tiempo= new Timer(milisegundos, new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    pelota.setLocation(pelota.getX()+(pelvel*aleatorioX), pelota.getY()+(pelvel*aleatorioY));
+                    pelota.repaint();
+                }
+            });
+            
+            
+            
             
             ventana.addKeyListener(new KeyListener() {
                 @Override
@@ -71,18 +103,31 @@ public class Juego {
                 @Override
                 public void keyPressed(KeyEvent e) {
                     //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-                if (raquetaD.getY()>0 && e.getKeyCode()== KeyEvent.VK_UP){
-                    raquetaD.setLocation(raquetaD.getX(), raquetaD.getY()-raqVel);
-                }
-                if (raquetaD.getY()<371 && e.getKeyCode()== KeyEvent.VK_DOWN){ 
-                    raquetaD.setLocation(raquetaD.getX(), raquetaD.getY()+raqVel);
-                }
-                if (raquetaI.getY()>0 && e.getKeyCode()== KeyEvent.VK_W){
-                    raquetaI.setLocation(raquetaI.getX(), raquetaI.getY()-raqVel);
-                }
-                if (raquetaI.getY()<371 && e.getKeyCode()== KeyEvent.VK_S){
-                    raquetaI.setLocation(raquetaI.getX(), raquetaI.getY()+raqVel);
-                }
+                    if (raquetaD.getY()>0 && e.getKeyCode()== KeyEvent.VK_UP){
+                        raquetaD.setLocation(raquetaD.getX(), raquetaD.getY()-raqVel);
+                        raqueD.setBounds(raquetaD.getBounds());
+                    }
+                    if (raquetaD.getY()<371 && e.getKeyCode()== KeyEvent.VK_DOWN){ 
+                        raquetaD.setLocation(raquetaD.getX(), raquetaD.getY()+raqVel);
+                        raqueD.setBounds(raquetaD.getBounds());
+                    }
+                    if (raquetaI.getY()>0 && e.getKeyCode()== KeyEvent.VK_W){
+                        raquetaI.setLocation(raquetaI.getX(), raquetaI.getY()-raqVel);
+                        raqueI.setBounds(raquetaI.getBounds());
+                    }
+                    if (raquetaI.getY()<371 && e.getKeyCode()== KeyEvent.VK_S){
+                        raquetaI.setLocation(raquetaI.getX(), raquetaI.getY()+raqVel);
+                        raqueI.setBounds(raquetaI.getBounds());
+                    }
+                    if(e.getKeyCode()==KeyEvent.VK_SPACE){
+                        if(pause==0){
+                            tiempo.start();
+                            pause=1;
+                        }else{
+                        tiempo.stop();
+                        pause=0;
+                        }
+                    }
                 }
                 
                 @Override
