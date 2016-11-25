@@ -1,5 +1,7 @@
 package Todo;
 import java.awt.Color;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -12,6 +14,7 @@ public class Juego {
         JLabel pelota;
         JLabel raquetaI;
         JLabel raquetaD;
+        int raqVel=10;
         //Constr
         public Juego(){
             //Ventana
@@ -57,6 +60,36 @@ public class Juego {
             pelota.setIcon(new ImageIcon("imagenes/pelota.png"));
             pelota.setVisible(true);
             panelJuego.add(pelota, 0);
+            
+            
+            ventana.addKeyListener(new KeyListener() {
+                @Override
+                public void keyTyped(KeyEvent e) {
+                    //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+                }
+
+                @Override
+                public void keyPressed(KeyEvent e) {
+                    //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+                if (e.getKeyCode()== KeyEvent.VK_UP){
+                    raquetaD.setLocation(raquetaD.getX(), raquetaD.getY()-raqVel);
+                }
+                if (e.getKeyCode()== KeyEvent.VK_DOWN){ 
+                    raquetaD.setLocation(raquetaD.getX(), raquetaD.getY()+raqVel);
+                }
+                if (e.getKeyCode()== KeyEvent.VK_W){
+                    raquetaI.setLocation(raquetaI.getX(), raquetaI.getY()-raqVel);
+                }
+                if (e.getKeyCode()== KeyEvent.VK_S){
+                    raquetaI.setLocation(raquetaI.getX(), raquetaI.getY()+raqVel);
+                }
+                }
+                
+                @Override
+                public void keyReleased(KeyEvent e) {
+                    //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+                }
+            });
             
             ventana.setVisible(true);
         }
