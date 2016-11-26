@@ -16,7 +16,7 @@ public class Juego {
         //Atri
         JFrame ventana;
         JPanel panelJuego;
-        JLabel mesa, pelota, raquetaI, raquetaD, puntos;
+        JLabel mesa, pelota, raquetaI, raquetaD, puntos, Jugador1, Jugador2;
         Rectangle raqueI, raqueD, pel;
        
         
@@ -125,7 +125,7 @@ public class Juego {
                         if(aleatorioY>5)
                             aleatorioY=(aleatorioY-5)*-1;
                         if(puntosI==2){//PUNTAJE GANADOR 
-                             JOptionPane.showMessageDialog(null,"Ganador jugador de la Izquierda a 2 pts");
+                             JOptionPane.showMessageDialog(null,"¡Ganador! jugador de la Izquierda");
                              puntosI=0;
                              puntosD=0;
                         }
@@ -140,13 +140,14 @@ public class Juego {
                         if(aleatorioY>5)
                             aleatorioY=(aleatorioY-5)*-1;
                         if(puntosD==2){//PUNTAJE GANADOR
-                             JOptionPane.showMessageDialog(null,"Ganador jugador de la Derecha a 2 pts");
+                             JOptionPane.showMessageDialog(null,"¡Ganador! jugador de la Derecha");
                              puntosD=0;
                              puntosI=0;
                         }
                     }
                     puntos.setText(puntosI+" VS "+puntosD);
                     puntos.repaint();
+
                 }
             });
             
