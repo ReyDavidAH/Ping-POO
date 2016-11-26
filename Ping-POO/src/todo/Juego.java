@@ -116,21 +116,6 @@ public class Juego {
                          aleatorioY+=ale.nextInt(2)+1;
                     }
                     if(pelota.getX()<0){//Puntajes
-                        puntosI++;
-                        pelota.setLocation(487, 220);
-                        aleatorioX= ale.nextInt(10)+1;
-                        aleatorioY= ale.nextInt(10)+1;
-                        if(aleatorioX>5)
-                            aleatorioX=(aleatorioX-5)*-1;
-                        if(aleatorioY>5)
-                            aleatorioY=(aleatorioY-5)*-1;
-                        if(puntosI==2){//PUNTAJE GANADOR 
-                             JOptionPane.showMessageDialog(null,"¡Ganador! jugador de la Izquierda");
-                             puntosI=0;
-                             puntosD=0;
-                        }
-                    }
-                    if(pelota.getX()>985){//Puntajes
                         puntosD++;
                         pelota.setLocation(487, 220);
                         aleatorioX= ale.nextInt(10)+1;
@@ -139,10 +124,25 @@ public class Juego {
                             aleatorioX=(aleatorioX-5)*-1;
                         if(aleatorioY>5)
                             aleatorioY=(aleatorioY-5)*-1;
-                        if(puntosD==2){//PUNTAJE GANADOR
+                        if(puntosD==1){//PUNTAJE GANADOR 
                              JOptionPane.showMessageDialog(null,"¡Ganador! jugador de la Derecha");
                              puntosD=0;
                              puntosI=0;
+                        }
+                    }
+                    if(pelota.getX()>985){//Puntajes
+                        puntosI++;
+                        pelota.setLocation(487, 220);
+                        aleatorioX= ale.nextInt(10)+1;
+                        aleatorioY= ale.nextInt(10)+1;
+                        if(aleatorioX>5)
+                            aleatorioX=(aleatorioX-5)*-1;
+                        if(aleatorioY>5)
+                            aleatorioY=(aleatorioY-5)*-1;
+                        if(puntosI==1){//PUNTAJE GANADOR
+                             JOptionPane.showMessageDialog(null,"¡Ganador! jugador de la Izquierda");
+                             puntosI=0;
+                             puntosD=0;
                         }
                     }
                     puntos.setText(puntosI+" VS "+puntosD);
