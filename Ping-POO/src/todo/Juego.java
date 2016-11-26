@@ -9,21 +9,20 @@ import java.util.Random;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 public class Juego {
         //Atri
         JFrame ventana;
         JPanel panelJuego;
-        JLabel mesa;
-        JLabel pelota;
-        JLabel raquetaI;
-        JLabel raquetaD;
+        JLabel mesa, pelota, raquetaI, raquetaD, puntos;
         Rectangle raqueI, raqueD, pel;
        
         
         
-        int raqVel=10, px, py, pelvel=1, aleatorioX, aleatorioY, milisegundos=20/*Velocidad a la que viaja la pelota*/, pause=0;
+        int raqVel=30, px, py, pelvel=1, aleatorioX, aleatorioY, milisegundos=15/*Velocidad a la que viaja la pelota*/, pause=0, puntosI=0, puntosD=0;
+       
         Random ale=new Random();
         Timer tiempo;
         //Constr
@@ -76,8 +75,7 @@ public class Juego {
             raqueD= new Rectangle(raquetaD.getBounds());
             pel= new Rectangle(pelota.getBounds());
             
-            raqueI.setBounds(raquetaI.getBounds());
-            raqueD.setBounds(raquetaD.getBounds());
+            
             aleatorioX= ale.nextInt(10)+1;
             aleatorioY= ale.nextInt(10)+1;
             
@@ -86,11 +84,69 @@ public class Juego {
             if(aleatorioY>5)
                 aleatorioY=(aleatorioY-5)*-1;
             
+            puntos= new JLabel(puntosI+" VS "+puntosD);
+            puntos.setSize(100, 20);
+            puntos.setLocation(480, 10);
+            puntos.setVisible(true);
+            
+            panelJuego.add(puntos, 0);
+            
             tiempo= new Timer(milisegundos, new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     pelota.setLocation(pelota.getX()+(pelvel*aleatorioX), pelota.getY()+(pelvel*aleatorioY));
+                    pel.setBounds(pelota.getBounds());
+                    raqueD.setBounds(raquetaD.getBounds());
+                    raqueI.setBounds(raquetaI.getBounds());
                     pelota.repaint();
+                    
+                    if(pelota.getY()<2){//Para que no salga de la pantalla
+                        aleatorioY*=-1;   
+                    }
+                    if(pelota.getY()>440){
+                        aleatorioY*=-1;   
+                    }
+                    
+                    if(pel.intersects(raqueI)){//Cambie de direccion cuando toque la raqueta
+                         aleatorioX*=-1;  
+                         aleatorioY+=ale.nextInt(2)+1;
+                    }
+                    if(pel.intersects(raqueD)){
+                         aleatorioX*=-1;  
+                         aleatorioY+=ale.nextInt(2)+1;
+                    }
+                    if(pelota.getX()<0){//Puntajes
+                        puntosI++;
+                        pelota.setLocation(487, 220);
+                        aleatorioX= ale.nextInt(10)+1;
+                        aleatorioY= ale.nextInt(10)+1;
+                        if(aleatorioX>5)
+                            aleatorioX=(aleatorioX-5)*-1;
+                        if(aleatorioY>5)
+                            aleatorioY=(aleatorioY-5)*-1;
+                        if(puntosI==2){//PUNTAJE GANADOR 
+                             JOptionPane.showMessageDialog(null,"Ganador jugador de la Izquierda a 2 pts");
+                             puntosI=0;
+                             puntosD=0;
+                        }
+                    }
+                    if(pelota.getX()>985){//Puntajes
+                        puntosD++;
+                        pelota.setLocation(487, 220);
+                        aleatorioX= ale.nextInt(10)+1;
+                        aleatorioY= ale.nextInt(10)+1;
+                        if(aleatorioX>5)
+                            aleatorioX=(aleatorioX-5)*-1;
+                        if(aleatorioY>5)
+                            aleatorioY=(aleatorioY-5)*-1;
+                        if(puntosD==2){//PUNTAJE GANADOR
+                             JOptionPane.showMessageDialog(null,"Ganador jugador de la Derecha a 2 pts");
+                             puntosD=0;
+                             puntosI=0;
+                        }
+                    }
+                    puntos.setText(puntosI+" VS "+puntosD);
+                    puntos.repaint();
                 }
             });
             
@@ -106,7 +162,7 @@ public class Juego {
                 @Override
                 public void keyPressed(KeyEvent e) {
                     //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-                    if (raquetaD.getY()>0 && e.getKeyCode()== KeyEvent.VK_UP){
+                    if (raquetaD.getY()>0 && e.getKeyCode()== KeyEvent.VK_UP){//La raqueta se mueva con flechas
                         raquetaD.setLocation(raquetaD.getX(), raquetaD.getY()-raqVel);
                         raqueD.setBounds(raquetaD.getBounds());
                     }
@@ -114,7 +170,7 @@ public class Juego {
                         raquetaD.setLocation(raquetaD.getX(), raquetaD.getY()+raqVel);
                         raqueD.setBounds(raquetaD.getBounds());
                     }
-                    if (raquetaI.getY()>0 && e.getKeyCode()== KeyEvent.VK_W){
+                    if (raquetaI.getY()>0 && e.getKeyCode()== KeyEvent.VK_W){//Raqueta funcione con letras w,s
                         raquetaI.setLocation(raquetaI.getX(), raquetaI.getY()-raqVel);
                         raqueI.setBounds(raquetaI.getBounds());
                     }
@@ -122,13 +178,27 @@ public class Juego {
                         raquetaI.setLocation(raquetaI.getX(), raquetaI.getY()+raqVel);
                         raqueI.setBounds(raquetaI.getBounds());
                     }
-                    if(e.getKeyCode()==KeyEvent.VK_SPACE){
+                    if(e.getKeyCode()==KeyEvent.VK_SPACE){//Poner pause al juego
                         if(pause==0){
                             tiempo.start();
                             pause=1;
+                            pelota.setLocation(487, 220);
+                            aleatorioX= ale.nextInt(10)+1;
+                            aleatorioY= ale.nextInt(10)+1;
+                            if(aleatorioX>5)
+                                aleatorioX=(aleatorioX-5)*-1;
+                            if(aleatorioY>5)
+                                aleatorioY=(aleatorioY-5)*-1;
                         }else{
                             tiempo.stop();
                             pause=0;
+                            pelota.setLocation(487, 220);
+                            aleatorioX= ale.nextInt(10)+1;
+                            aleatorioY= ale.nextInt(10)+1;
+                            if(aleatorioX>5)
+                                aleatorioX=(aleatorioX-5)*-1;
+                            if(aleatorioY>5)
+                                aleatorioY=(aleatorioY-5)*-1;
                         }
                     }
                 }
