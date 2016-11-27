@@ -1,5 +1,6 @@
 
-package ElGato;
+package Gatito;
+
 
 import java.awt.Color;
 import java.awt.event.MouseAdapter;
