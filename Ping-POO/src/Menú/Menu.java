@@ -20,6 +20,7 @@ public class Menu extends javax.swing.JFrame {
         BotónGato = new javax.swing.JButton();
         BotónViborín = new javax.swing.JButton();
         BotónSalir = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -73,6 +74,10 @@ public class Menu extends javax.swing.JFrame {
         });
         getContentPane().add(BotónSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 460, -1, -1));
 
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Menú/Menú.png"))); // NOI18N
+        jLabel1.setText("jLabel1");
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 440, -1));
+
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Menú/maxresdefault.jpg"))); // NOI18N
         getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -20, 441, 610));
 
@@ -91,7 +96,7 @@ public class Menu extends javax.swing.JFrame {
 
     private void BotónGatoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotónGatoActionPerformed
         //Éste código se ejecuta al presionar el botón número 2.
-        Gato gatillo=new Gato();
+        Gato gatox=new Gato();
     }//GEN-LAST:event_BotónGatoActionPerformed
 
     private void BotónViborínActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotónViborínActionPerformed
@@ -138,6 +143,7 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JButton BotónPingPOO;
     private javax.swing.JButton BotónSalir;
     private javax.swing.JButton BotónViborín;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     // End of variables declaration//GEN-END:variables
 }
