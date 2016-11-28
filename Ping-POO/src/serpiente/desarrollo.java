@@ -12,6 +12,7 @@ import java.util.Random;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
@@ -97,15 +98,27 @@ public class desarrollo {
                 serp.setBounds(serpiente.get(0).getBounds());
                 if(serpiente.get(0).getX() > 540){
                     perdio = 1;
+                    JOptionPane.showMessageDialog(null,"Perdiste!! Vuelve a abrirlo");
+                    
+                   
                 }
                 if(serpiente.get(0).getX() < 10){
                     perdio = 1;
+                    JOptionPane.showMessageDialog(null,"Perdiste!! Vuelve a abrirlo");
+                    
+                    
                 }
                 if(serpiente.get(0).getY() > 540){
                     perdio = 1;
+                    JOptionPane.showMessageDialog(null,"Perdiste!! Vuelve a abrirlo");
+                    
+                    
                 }
                 if(serpiente.get(0).getY() < 10){
                     perdio = 1;
+                    JOptionPane.showMessageDialog(null,"Perdiste!! Vuelve a abrirlo");
+                   
+                    
                 }
                 if(perdio == 1){
                     tiempo.stop();
@@ -116,7 +129,7 @@ public class desarrollo {
                     cy = aleatorio.nextInt(540);
                     comida.setLocation(cx, cy);
                     comida.repaint();
-                    System.out.println("comi");
+                    
                     JLabel aux = new JLabel();
                     aux.setLocation(200,200);
                     aux.setSize(20,20);
@@ -124,7 +137,7 @@ public class desarrollo {
                     aux.setVisible(true);
                     serpiente.add(aux);
                     paneljuego.add(serpiente.get(serpiente.size()-1),0);
-                    System.out.println(""+ serpiente.size());
+                    
                     contador += 1;
                     puntos.setText("Puntuacion: "+ contador);
                     puntos.repaint();
@@ -151,7 +164,7 @@ public class desarrollo {
             public void keyPressed(KeyEvent e) {
                 //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
                 if(e.getKeyCode() ==  KeyEvent.VK_UP){
-                    System.out.println("arriba");
+                    
                     if(serpiente.get(0).getY()>0){
                         y = -desplazamiento;
                         x = 0;
@@ -163,7 +176,7 @@ public class desarrollo {
                     }
                 }
                  if(e.getKeyCode() ==  KeyEvent.VK_DOWN){
-                    System.out.println("abajo");
+                    
                     if(serpiente.get(0).getY()<600){
                         y = desplazamiento;
                         x = 0;
@@ -175,7 +188,7 @@ public class desarrollo {
                     }
                 }
                   if(e.getKeyCode() ==  KeyEvent.VK_LEFT){
-                    System.out.println("izquierda");
+                    
                     if(serpiente.get(0).getX()>0){
                         y = 0;
                         x = -desplazamiento;
@@ -187,7 +200,7 @@ public class desarrollo {
                     }
                 }
                  if(e.getKeyCode() ==  KeyEvent.VK_RIGHT){
-                    System.out.println("derecha");
+                   
                     if(serpiente.get(0).getX()<600){
                         y = 0;
                         x = desplazamiento;
